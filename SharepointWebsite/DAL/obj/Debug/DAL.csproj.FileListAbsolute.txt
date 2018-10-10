@@ -1,0 +1,2 @@
+D:\My Tasks\SharepointWebsite\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+D:\My Tasks\SharepointWebsite\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache

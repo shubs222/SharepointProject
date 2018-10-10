@@ -1,0 +1,86 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Microsoft.SharePoint.Client;
+using System.Security;
+
+namespace SharepointWebsite
+{
+    public class ListData
+    {
+        Credentials credentials = new Credentials();
+        ClientContext clientcntx;
+        public List<string> GetlistData()
+        {
+            List<string> sitelist;
+            credentials.SetUSerCredentials();
+            using (clientcntx = new ClientContext(credentials.Url))
+            {
+               
+                clientcntx.Credentials = new SharePointOnlineCredentials(credentials.username, credentials.password);
+                Web Webpage = clientcntx.Web;
+                clientcntx.Load(Webpage.Lists, lists => lists.Include(list => list.Title, list => list.Id));
+                try
+                {
+                    clientcntx.ExecuteQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex);
+                    throw ex;
+                }
+
+               sitelist = new List<string>();
+                foreach (List l in Webpage.Lists)
+                {
+                    sitelist.Add(l.Title);
+                }
+            }
+            return sitelist;
+        }
+
+        public List<string> GetFields(string Listname)
+        {
+            List<string> fieldlist;
+            credentials.SetUSerCredentials();
+            using (clientcntx = new ClientContext(credentials.Url))
+            {
+
+                clientcntx.Credentials = new SharePointOnlineCredentials(credentials.username, credentials.password);
+                List list = clientcntx.Web.Lists.GetByTitle(Listname);
+                FieldCollection fieldc = list.Fields;
+                clientcntx.Load(fieldc);
+                clientcntx.ExecuteQuery();
+                fieldlist = new List<string>();
+                foreach (Field field in fieldc)
+                {
+                    fieldlist.Add(field.Title);
+                }
+            }
+            return fieldlist;
+        }
+
+        public List<string> GetViews(string Listname)
+        {
+            List<string> viewset;
+            credentials.SetUSerCredentials();
+            using (clientcntx = new ClientContext(credentials.Url))
+            {
+
+                clientcntx.Credentials = new SharePointOnlineCredentials(credentials.username, credentials.password);
+                List list = clientcntx.Web.Lists.GetByTitle(Listname);
+                ViewCollection viewc = list.Views;
+                clientcntx.Load(viewc);
+                clientcntx.ExecuteQuery();
+                viewset = new List<string>();
+                foreach (View v in viewc)
+                {
+                    viewset.Add(v.Title);
+                }
+              
+            }
+            return viewset;
+        }
+    }
+}
