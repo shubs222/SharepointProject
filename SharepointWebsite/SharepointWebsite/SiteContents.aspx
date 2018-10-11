@@ -25,10 +25,10 @@
 
                 %>
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#collapsee<%= listcount%>"><%= contents[listcount] %></a>
-                        </h4>
+                    <div class="panel-heading panel-title col-md-12">
+                        <%--<h4 class="panel-title">--%>
+                         <div class="panel-heading col-md-3"><a data-toggle="collapse" href="#collapsee<%= listcount%>"><%= contents[listcount] %></a></div>    <div class="panel-heading col-md-3"><a href="BackupPage.aspx/?ListName=<%=contents[listcount] %>" style="margin-left: 10%;" class="btn btn-warning btn-sm" role="button">Create Backup</a></div>
+                       <%-- </h4>--%>
                     </div>
 
                     <div id="collapsee<%= listcount%>" class="panel-collapse collapse">
@@ -37,13 +37,13 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" href="#collapseer<%= listcount%>">Fields</a> <a href="AddField.aspx//?SiteName=<%=contents[listcount] %>" style="margin-left: 10%;" class="btn btn-primary btn-sm" role="button">Add Field</a>
+                                        <a data-toggle="collapse" href="#collapseer<%= listcount%>">Fields</a> <a href="AddField.aspx/?ListName=<%=contents[listcount] %>" style="margin-left: 10%;" class="btn btn-primary btn-sm" role="button">Add Field</a>
                                     </h4>
                                 </div>
                                 <div id="collapseer<%= listcount%>" class="panel-collapse collapse">
                                     <% for (int fieldcount = 0; fieldcount < fields.Count; fieldcount++)
                                         {     %>
-                                    <div class="panel-body"><a data-toggle="collapse" href="#collapse2"><%= fields[fieldcount] %></a>  </div> <div class="panel-body"> <a href="EditPage.aspx/?SiteName=<%=contents[listcount] %>&&ViewName=<%=fields[fieldcount] %>" style="margin-left: 10%;" class="btn btn-info btn-sm" role="button">Edit Field</a> <a href="DeleteField.aspx/?SiteName=<%=contents[listcount] %>&&ViewName=<%=fields[fieldcount] %>" style="margin-left: 10%;" class="btn btn-danger btn-sm" role="button">Delete Field</a></div>
+                                    <div class="panel-body"><a data-toggle="collapse" href="#collapse2"><%= fields[fieldcount] %></a>  </div> <div class="panel-body"> <a href="EditPage.aspx/?ListName=<%=contents[listcount] %>&&FieldName=<%=fields[fieldcount] %>" style="margin-left: 10%;" class="btn btn-info btn-sm" role="button">Edit Field</a> <a href="DeleteField.aspx/?ListName=<%=contents[listcount] %>&&FieldName=<%=fields[fieldcount] %>" style="margin-left: 10%;" class="btn btn-danger btn-sm" role="button">Delete Field</a></div>
                                     <% } %>
                                 </div>
                             </div>
@@ -53,28 +53,17 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" href="#collapseerer<%= listcount%>">Views</a> <a href="ViewAddEdit.aspx" style="margin-left: 10%;" class="btn btn-primary btn-sm" role="button">Add View</a>
+                                        <a data-toggle="collapse" href="#collapseerer<%= listcount%>">Views</a> <a href="ViewAddEdit.aspx/?ListName=<%=contents[listcount] %>" style="margin-left: 10%;" class="btn btn-primary btn-sm" role="button">Add View</a>
                                     </h4>
                                 </div>
                                 <div id="collapseerer<%= listcount%>" class="panel-collapse collapse">
                                     <% for (int viewcount = 0; viewcount < views.Count; viewcount++)
                                         {     %>
-                                    <div class="panel-body"><a data-toggle="collapse" href="#collapse2"><%= views[viewcount] %></a></div> <div class="panel-body"> <a href="EditView.aspx" style="margin-left: 10%;" class="btn btn-info btn-sm" role="button">Edit View</a><a href="ViewOperations.asmx/DeleteView/?SiteName=<%=contents[listcount] %>&&ViewName=<%=views[viewcount] %>" style="margin-left: 10%;" class="btn btn-danger btn-sm" role="button">Delete View</a></div>
+                                    <div class="panel-body"><a data-toggle="collapse" href="#collapse2"><%= views[viewcount] %></a></div> <div class="panel-body"> <a href="Editview.aspx?ListName=<%=contents[listcount] %>&&ViewName=<%=views[viewcount] %>" style="margin-left: 10%;" class="btn btn-info btn-sm" role="button">Edit View</a><a id="<%= contents[listcount]%>!<%=views[viewcount] %>" href="#" style="margin-left: 10%;" class="btn btn-danger btn-sm reloadpagedeleteview" role="button">Delete View</a></div>
                                     <% } %>
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
-
-                        <%--<% for (int viewcount = 0; viewcount < views.Count; viewcount++)
-                            {     %>
-                        <div class="panel-footer"><a data-toggle="collapse" href="#collapse3"><%= views[viewcount] %></a></div>
-                        <% } %>--%>
                     </div>
                 </div>
                 <% } %>
@@ -82,3 +71,5 @@
         </div>
     </div>
 </asp:Content>
+
+

@@ -11,7 +11,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -53,13 +53,13 @@
                         <li><a runat="server" href="~/About">About</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                     </ul>--%>
-                  <%--  <asp:LoginView runat="server" ViewStateMode="Disabled">
+                    <%--  <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>--%>
-                           <%-- <ul class="nav navbar-nav navbar-right">
+                    <%-- <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/Account/Register">Register</a></li>
                                 <li><a runat="server" href="~/Account/Login">Log in</a></li>
                             </ul>--%>
-                       <%--  </AnonymousTemplate>
+                    <%--  </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
@@ -76,8 +76,45 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-           
+
         </div>
     </form>
 </body>
 </html>
+<script type="text/javascript">
+
+    $('.reloadpagedeleteview').click(function () {
+        alert("m in");
+
+        var deleteconfrim = confirm("Are You Sure You Want To Delete?");
+
+        if (deleteconfrim) {
+            var id = $(this).attr('id');
+            var temp = new Array();
+            temp = id.split("!");
+            var dataString = { 'ListName': temp[0], 'ViewName': temp[1] };
+            var param = JSON.stringify(dataString);
+
+            $.ajax({
+                type: 'post',
+                data: param,
+                dataType: 'json',
+                url: "ViewOperations.asmx/DeleteView",
+                async: true,
+                contentType: "application/json; charset=utf-8",
+                success: function (dataa) {
+                    alert("View Deleted Successfully...");
+                    location.reload(true);
+                },
+                error: function (error) {
+                    alert("Cannot Delete View");
+                }
+
+            });
+        }
+
+        location.reload();
+
+    });
+
+</script>
