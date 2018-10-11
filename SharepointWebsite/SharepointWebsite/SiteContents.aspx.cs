@@ -18,14 +18,14 @@ namespace SharepointWebsite
         public List<string> views;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Label contentslist;
+           // Label contentslist;
             contents = listData.GetlistData();
             
            
-            TreeNode root = new TreeNode();
-            Button backup;
-            root.Text = "site Contents";
-            TreeView1.Nodes.Add(root);
+           // TreeNode root = new TreeNode();
+           //// Button backup;
+           // root.Text = "site Contents";
+           // TreeView1.Nodes.Add(root);
             for (int listcount = 0; listcount < contents.Count; listcount++)
             {
                 //System.Web.UI.HtmlControls.HtmlGenericControl Parent1 = new System.Web.UI.HtmlControls.HtmlGenericControl();
