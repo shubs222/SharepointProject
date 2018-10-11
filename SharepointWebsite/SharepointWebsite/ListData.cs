@@ -15,11 +15,12 @@ namespace SharepointWebsite
         {
             List<string> sitelist;
             credentials.SetUSerCredentials();
-            using (clientcntx = new ClientContext(credentials.Url))
-            {
-               
-                clientcntx.Credentials = new SharePointOnlineCredentials(credentials.username, credentials.password);
-                Web Webpage = clientcntx.Web;
+            //using (clientcntx = new ClientContext(credentials.Url))
+            //{
+
+            //clientcntx.Credentials = new SharePointOnlineCredentials(credentials.username, credentials.password);
+             clientcntx = ClientContextCredentials.isClX;
+            Web Webpage = clientcntx.Web;
                 clientcntx.Load(Webpage.Lists, lists => lists.Include(list => list.Title, list => list.Id));
                 try
                 {
@@ -36,7 +37,7 @@ namespace SharepointWebsite
                 {
                     sitelist.Add(l.Title);
                 }
-            }
+            
             return sitelist;
         }
 
@@ -44,10 +45,11 @@ namespace SharepointWebsite
         {
             List<string> fieldlist;
             credentials.SetUSerCredentials();
-            using (clientcntx = new ClientContext(credentials.Url))
-            {
+            //using (clientcntx = new ClientContext(credentials.Url))
+            //{
 
-                clientcntx.Credentials = new SharePointOnlineCredentials(credentials.username, credentials.password);
+            //clientcntx.Credentials = new SharePointOnlineCredentials(credentials.username, credentials.password);
+            clientcntx = ClientContextCredentials.isClX;
                 List list = clientcntx.Web.Lists.GetByTitle(Listname);
                 FieldCollection fieldc = list.Fields;
                 clientcntx.Load(fieldc);
@@ -57,7 +59,7 @@ namespace SharepointWebsite
                 {
                     fieldlist.Add(field.Title);
                 }
-            }
+           // }
             return fieldlist;
         }
 
@@ -65,11 +67,12 @@ namespace SharepointWebsite
         {
             List<string> viewset;
             credentials.SetUSerCredentials();
-            using (clientcntx = new ClientContext(credentials.Url))
-            {
+            //using (clientcntx = new ClientContext(credentials.Url))
+            //{
 
-                clientcntx.Credentials = new SharePointOnlineCredentials(credentials.username, credentials.password);
-                List list = clientcntx.Web.Lists.GetByTitle(Listname);
+            //    clientcntx.Credentials = new SharePointOnlineCredentials(credentials.username, credentials.password);
+             clientcntx = ClientContextCredentials.isClX;
+            List list = clientcntx.Web.Lists.GetByTitle(Listname);
                 ViewCollection viewc = list.Views;
                 clientcntx.Load(viewc);
                 clientcntx.ExecuteQuery();
@@ -79,7 +82,7 @@ namespace SharepointWebsite
                     viewset.Add(v.Title);
                 }
               
-            }
+            
             return viewset;
         }
     }
